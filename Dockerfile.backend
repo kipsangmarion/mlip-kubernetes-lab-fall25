@@ -1,0 +1,20 @@
+# Use a lightweight Python image
+FROM python:3.9-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the app file
+COPY backend.py /app
+
+# Install required packages
+RUN pip install Flask scikit-learn numpy joblib pandas
+
+# Create directory for shared volume
+RUN mkdir /shared-volume
+
+# Expose the application port
+EXPOSE 5001
+
+# Run the Flask app
+CMD ["python", "backend.py"]

@@ -1,0 +1,16 @@
+FROM python:3.9-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the training script
+COPY model_trainer.py /app/
+
+# Install required packages
+RUN pip install scikit-learn numpy joblib pandas
+
+# Create directory for shared volume
+RUN mkdir /shared-volume
+
+# Run the training script
+CMD ["python", "model_trainer.py"]

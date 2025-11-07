@@ -15,12 +15,14 @@ spec:
       containers:
       - name: flask-backend
         # TODO: Replace <DockerHub-Username> with your Docker Hub username, and use the appropriate image name and tag
-        image: <DockerHub-Username>/<backend-image-name>:<backend-image-tag>
+        image: kipsangmarion/mlip-backend:1.0.0
         ports:
         - containerPort: 5001
         lifecycle:
           preStop:
             ## TODO: implement this so that backend.py handles SIGTERM and logs a message
+            exec:
+              command: ["/bin/sh", "echo 'PreStop hook triggered'; kill -s SIGTERM 1; sleep 3"]
 
         volumeMounts:
         - name: model-volume
